@@ -18,24 +18,27 @@ class App extends Component {
 
   GetWeather = async e => {
     e.preventDefault();
-    const { city, country } = e.target.elements;
+    const { country } = e.target.elements;
 
-    const cityValue = city.value;
     const countryValue = country.value;
+    console.log(countryValue);
 
-    if (cityValue && countryValue) {
-      const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue},${countryValue}&appid=${WEATHER_KEY}&units=metric`;
-      const response = await fetch(API_URL);
-      const data = await response.json();
-      console.log(this.state);
+    if (countryValue) {
+      const API_COUNTRY_URL = `https://restcountries.eu/rest/v2/name/${countryValue}`;
+      const country_response = await fetch(API_COUNTRY_URL);
+      const country_data = await country_response.json();
+      const country_capital = country_data[0].capital;
+      const API_WEATHER_URL = `https://api.openweathermap.org/data/2.5/weather?q=${country_capital}&appid=${WEATHER_KEY}&units=metric`;
+      const weather_response = await fetch(API_WEATHER_URL);
+      const weather_data = await weather_response.json();
 
       this.setState({
-        temperature: data.main.temp,
-        description: data.weather[0].description,
-        humidity: data.main.humidity,
-        wind_speed: data.wind.speed,
-        city: data.name,
-        country: data.sys.country,
+        temperature: weather_data.main.temp,
+        description: weather_data.weather[0].description,
+        humidity: weather_data.main.humidity,
+        wind_speed: weather_data.wind.speed,
+        city: weather_data.name,
+        country: weather_data.sys.country,
         error: null
       });
     } else { this.setState({ error: 'Please enter a city and country' }) }
