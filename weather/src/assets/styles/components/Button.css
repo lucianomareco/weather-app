@@ -1,0 +1,24 @@
+@import "../vars.css";
+
+.button {
+  height: 50px;
+  width: 100%;
+  padding: 0 30px;
+  border-radius: 98px;
+  border: transparent solid 4px;
+  background-color: var(--primary-color);
+  box-shadow: -10px -10px 30px var(--light-color),
+    10px 10px 30px var(--dark-color);
+  margin: 10px 0;
+}
+
+.button:active {
+  border: var(--primary-color) solid 4px;
+  box-shadow: -10px -10px 30px var(--light-color),
+    10px 10px 30px var(--dark-color), inset -3px -3px 10px var(--light-color),
+    inset 3px 3px 10px var(--dark-color);
+}
+
+.button:focus {
+  outline: none;
+}
