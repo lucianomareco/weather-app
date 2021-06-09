@@ -11,8 +11,8 @@ const WeatherInfo = (props) => {
                     <p>{props.error}</p>
                 </div>
             }
-            {props.temperature ?
-                <div className="card card-body">
+            { (props.temperature && props.error == null) &&
+                < div className="card card-body">
                     <div className="row">
                         <div className="col-6">
                             <p> Location: {props.city}, {props.country} </p>
@@ -26,12 +26,8 @@ const WeatherInfo = (props) => {
                         </div>
                     </div>
                 </div>
-                :
-                <div className="card card-body">
-                    <p>No request yet</p>
-                </div>
             }
-        </div>
+        </div >
     )
 }
 
